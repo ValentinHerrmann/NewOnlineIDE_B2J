@@ -270,8 +270,12 @@ export var AllSettingsMetadata: GroupOfSettingMetadata[] = [
                 settingType: 'setting',
                 name: SettingsMessages.classDiagramOmitVoidReturnType,
                 description: SettingsMessages.ClassDiagramOmitVoidReturnTypeDescription,
-                type: 'boolean',
+                type: 'enumeration',
+                optionValues: ["show", "omit"],
                 optionTexts: [SettingsMessages.show, SettingsMessages.omit],
+                action: (main, value) => {
+                    main.drawClassDiagrams(false);
+                }
             },
         ]
     },

@@ -186,7 +186,7 @@ export class ClassBox extends DiagramElement {
                     let returnType: string = m.isConstructor ? "" :
                         (m.returnParameterType == null ? "" : m.returnParameterType.toString());
 
-                    if(this.diagram.main.getSettings().getValue("classDiagram.omitVoidReturnType") === "true" && returnType === "void") {
+                    if(this.diagram.main.getSettings().getValue("classDiagram.omitVoidReturnType") == "omit" && returnType === "void") {
                         returnType = "";
                     }
 

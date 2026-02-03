@@ -14,7 +14,7 @@ export type SettingsType = {
     "editor.stickyScroll": "off" | "on",
     "classDiagram.typeConvention": "java" | "pascal",
     "classDiagram.background": "transparent" | "white",
-    "classDiagram.omitVoidReturnType": "true" | "false",
+    "classDiagram.omitVoidReturnType": "omit" | "show",
     "explorer.fileOrder": "user-defined" | "comparator",
     "explorer.workspaceOrder": "user-defined" | "comparator",
     "compiler.shadowedSymbolErrorLevel": "ignore" | "info" | "warning" | "error"
@@ -35,7 +35,7 @@ export var SettingDefaultValues: SettingsType = {
     "editor.stickyScroll": "on",
     "classDiagram.typeConvention": "java",
     "classDiagram.background": "transparent",
-    "classDiagram.omitVoidReturnType": "true",
+    "classDiagram.omitVoidReturnType": "omit",
     "explorer.fileOrder": "user-defined",
     "explorer.workspaceOrder": "user-defined",
     "compiler.shadowedSymbolErrorLevel": "warning"
