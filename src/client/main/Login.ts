@@ -270,8 +270,8 @@ export class Login {
 
     }
 
-    loginWithVidisOrAutoLogin(singleUseToken: string) {
-        this.loggedInWithVidis = true;
+    loginWithVidisOrAutoLogin(singleUseToken: string, loggedInWithVidis: boolean) {
+        this.loggedInWithVidis = loggedInWithVidis;
         jQuery('#login').hide();
         jQuery('#main').css('visibility', 'visible');
 

@@ -183,10 +183,11 @@ export class Main implements MainBase {
 
         // let singleUseToken: string | undefined = getCookieValue("singleUseToken");
         let singleUseToken: string | undefined = findGetParameter("singleUseToken");
+        let loggedInWithVidis: boolean = findGetParameter("vidis") == "true";
 
         if (singleUseToken) {
             this.login.initGUI();
-            this.login.loginWithVidisOrAutoLogin(singleUseToken);
+            this.login.loginWithVidisOrAutoLogin(singleUseToken, loggedInWithVidis);
         } else {
             this.login.initGUI();
         }
