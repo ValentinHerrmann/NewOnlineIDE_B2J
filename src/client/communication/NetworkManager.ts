@@ -103,6 +103,21 @@ export class NetworkManager {
         })
     }
 
+    savePruefungWorkspace(pruefungWorkspace: Workspace){
+
+        let request: SendUpdatesRequest = {
+            workspacesWithoutFiles: [pruefungWorkspace.getWorkspaceData(false)],
+            files: pruefungWorkspace.getFiles().map(file => file.getFileData(pruefungWorkspace)),
+            owner_id: this.main.workspacesOwnerId,
+            userId: this.main.user.id,
+            currentWorkspaceId: this.main.currentWorkspace?.pruefung_id == null ? this.main.currentWorkspace?.id : null,
+            getModifiedWorkspaces: false
+        }
+
+        ajaxAsync('servlet/sendUpdates', request);
+
+    }
+
     async sendUpdatesAsync(sendIfNothingIsDirty: boolean = false, sendBeacon: boolean = false, alertIfNewWorkspacesFound: boolean = false): Promise<boolean> {
 
         if (this.main.user == null || this.main.user.is_testuser) {

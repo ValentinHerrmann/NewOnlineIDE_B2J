@@ -123,7 +123,8 @@ export class PruefungManagerForStudents {
      * @returns 
      */
     async stopPruefung(renderWorkspaces: boolean) {
-        // await this.main.networkManager.sendUpdatesAsync();  // is done by fetchAndRenderOwnWorkspaces later on
+        // this is not done reliably by fetchAndRenderOwnWorkspaces later on, so we call it explicitly here to make sure all changes are sent to the server before we potentially switch to other workspaces
+        this.main.networkManager.savePruefungWorkspace(this.main.currentWorkspace);  
 
         console.log("Stopping pruefung...");
 
