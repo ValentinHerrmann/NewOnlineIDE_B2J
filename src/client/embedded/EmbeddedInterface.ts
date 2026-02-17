@@ -4,6 +4,7 @@ import { MainEmbedded } from "./MainEmbedded";
 interface IDEFileAccess {
     getName(): string;
     getText(): string;
+    setText(text: string): void;
 }
 
 interface SingleIDEAccess {
@@ -25,6 +26,9 @@ export class IDEFileAccessImpl implements IDEFileAccess {
     }
     getText(): string {
         return this.file.getText();
+    }
+    setText(text: string) {
+        this.file.setText(text);
     }
 
     
