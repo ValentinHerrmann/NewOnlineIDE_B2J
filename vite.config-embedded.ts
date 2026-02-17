@@ -27,7 +27,7 @@ export default {
                 },
             }
         },
-        outDir: './dist-embedded'
+        outDir: './dist'
     },
     css: {
         postcss: {
