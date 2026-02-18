@@ -1,4 +1,5 @@
 import { MainEmbedded } from "./MainEmbedded.js";
+import { OnlineIDEAccessImpl } from "./EmbeddedInterface.js";
 import { openContextMenu, makeEditable } from "../../tools/HtmlTools.js";
 import { JOScript } from "./EmbeddedStarter.js";
 import jQuery from "jquery";
@@ -51,17 +52,21 @@ export class EmbeddedFileExplorer {
             node.externalObject = file;
 
             this.treeview.selectNodeAndSetFocus(node, true);
+            OnlineIDEAccessImpl.notifyFileCreated(this.main, file.name);
             return file;
         }
 
         this.treeview.renameCallback = async (file, newName, node): Promise<{ correctedName: string; success: boolean; }> => {
+            const previousName = file.name;
             newName = newName.substring(0, 30);
             file.name = newName;
             file.setSaved(false);
+            OnlineIDEAccessImpl.notifyFileRenamed(this.main, previousName, newName);
             return {correctedName: newName, success: true};
         }
 
         this.treeview.deleteCallback = async (file, node) => {
+            const deletedName = file.name;
             let files = this.treeview.nodes.filter(node => !node.isRootNode() && node.externalObject != file).map(node => node.externalObject);
             this.main.removeFile(file);
             if(node?.hasFocus){
@@ -73,14 +78,13 @@ export class EmbeddedFileExplorer {
             }
             this.treeview.nodes.forEach(node => node.externalObject?.setSaved(false));
             this.main.showResetButton();
+            OnlineIDEAccessImpl.notifyFileDeleted(this.main, deletedName);
             return true;
         }
 
         this.treeview.nodeClickedCallback = (file) => {
             this.selectFile(file, false);
-            console.log("Selected file: " + file.name);
-            //@ts-ignore
-            window.selected_file_name = file.name;
+            OnlineIDEAccessImpl.notifyFileSelected(this.main, file.name);
         }
 
     }

@@ -237,9 +237,11 @@ export class MainEmbedded implements MainBase {
                         }
 
                         if (this.config.enableFileAccess) {
+                            // Register the IDE in the map BEFORE assigning window.online_ide_access,
+                            // so that the setter in index.js can call getIDE() and find this instance.
+                            OnlineIDEAccessImpl.registerIDE(this);
                             //@ts-ignore
                             window.online_ide_access = new OnlineIDEAccessImpl();
-                            OnlineIDEAccessImpl.registerIDE(this);
                         }
                     });
                 }
