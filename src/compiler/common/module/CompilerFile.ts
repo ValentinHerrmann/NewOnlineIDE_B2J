@@ -30,9 +30,9 @@ export class CompilerFile {
         this.name = name || "";
     }
 
-    // ponytail: check if this file should be hidden from the explorer using a dot-prefix naming convention
+    // ponytail: check if this file should be hidden from the explorer using a __-prefix naming convention
     isHidden(): boolean {
-        return this.name.startsWith('.');
+        return this.name.startsWith('__');
     }
 
     getText() {
